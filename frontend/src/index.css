@@ -1,0 +1,247 @@
+:root {
+  --white: #ddd;
+  --bg-body: #17181f;
+  --form-input-color: #777;
+  --btn-bg: #ddd;
+  --border-color: #30313d;
+  --green: #1c1;
+  --red: #c11;
+  --light-grey: #888;
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style-type: none;
+  text-decoration: none;
+  transition: all 0.15s ease-in-out;
+  scroll-behavior: smooth;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: sans-serif;
+  color: var(--white);
+  background: var(--bg-body);
+}
+#root {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  min-height: 95vh;
+}
+main {
+  max-width: 40rem;
+  box-shadow: 0px 0px 0.51rem rgba(255, 255, 255, 0.389);
+  border-radius: 1rem;
+  padding: 1rem;
+  padding-top: 0rem;
+  margin-top: 2rem;
+}
+.title {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 2.68rem;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+}
+.currency {
+  cursor: default;
+  letter-spacing: 0.15px;
+  font-weight: 600;
+  text-align: center;
+  font-size: 4.25rem;
+  margin-bottom: 2rem;
+  & .cents {
+    font-size: 2rem;
+    vertical-align: top;
+    display: inline-block;
+    margin-top: 0rem;
+  }
+}
+input {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding-inline: 0.75rem;
+  padding-block: 0.75rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.75rem;
+  background: transparent;
+  color: var(--form-input-color);
+  border: 0.35rem solid var(--border-color);
+  &[type="datetime-local"] {
+    filter: invert(1);
+    border-color: rgb(182 180 180 / 75%);
+    &:not(:focus-within) {
+      filter: invert(1);
+    }
+    &:focus,
+    &:hover {
+      border-color: black;
+      color: black;
+    }
+  }
+  &:focus-within {
+    border-color: rgba(255, 255, 255, 0.506);
+    color: white;
+  }
+}
+
+.exp-datetime {
+  padding-block: 1.05rem;
+  font-size: 1.5rem;
+}
+
+.inputs {
+  position: relative;
+  &:has(input.exp-item) {
+    width: 100%;
+  }
+  & input {
+    min-height: 4.5rem;
+    padding-top: 1.9rem;
+  }
+
+  & input:focus-within + label,
+  & input:not(:placeholder-shown) + label {
+    top: 1.3rem;
+    font-size: 1.25rem;
+  }
+  & input::placeholder {
+    color: transparent;
+  }
+  & label {
+    display: block;
+    position: absolute;
+    left: 1rem;
+    top: 42.5%;
+    filter: brightness(125%);
+    color: var(--light-grey);
+    font-size: 1.45rem;
+    transform: translateY(-50%);
+    transition: all 0.15s ease-in-out;
+    z-index: -1;
+  }
+}
+.expense-form {
+  & .expense-top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+  & .syntax {
+    margin-block: 0.5rem;
+    color: var(--white);
+    font-size: 1.45rem;
+    & strong {
+      width: 140px;
+      margin-inline: auto;
+      margin-block: 0.51rem;
+      text-align: center;
+      display: block;
+      color: white;
+      transform: skew(-10deg);
+      font-size: 1.25rem;
+    }
+  }
+  & .btn {
+    margin-block: 1rem;
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1.7rem;
+    font-weight: 500;
+    border-radius: 0.75rem;
+    background-color: var(--btn-bg);
+    color: var(--bg-body);
+    cursor: pointer;
+    &:hover {
+      opacity: 0.6;
+    }
+  }
+}
+.transactions {
+  margin-block: 2rem;
+  height: 100%;
+  max-height: 32vh;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 0.25rem;
+    height: 0.15rem;
+    border-radius: 1rem;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: rgb(48, 66, 55);
+    /* border: 1px solid royalblue; */
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--btn-bg);
+  }
+}
+.transaction {
+  font-size: 1.5rem;
+  padding: 0.5rem 0.85rem;
+  margin-block: 0.5rem;
+  padding-bottom: 0.8rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2.5rem;
+  border-bottom: 0.25rem solid var(--border-color);
+}
+.transaction-details {
+  width: 50%;
+}
+
+.transaction-title {
+  color: white;
+  text-transform: capitalize;
+  font-size: 1.6rem;
+  margin-bottom: 0.351rem;
+}
+
+.transaction-timeinfo {
+  flex-shrink: 0;
+  text-align: right;
+  .transaction-amount {
+    font-size: 2rem;
+  }
+  & .transaction-amount.profit {
+    color: var(--green);
+  }
+  & .transaction-amount.loss {
+    color: var(--red);
+  }
+}
+
+.transaction-time,
+.transaction-description {
+  color: var(--form-input-color);
+  font-size: 1.35rem;
+  /* margin: 0.15rem 0; */
+}
+.transaction-description {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.loss span {
+  display: inline-block;
+  transform: translateY(-0.11rem);
+}
+.credit {
+  text-align: right;
+  font-size: 1rem;
+  color: var(--light-grey);
+  /* margin-block: 1rem; */
+  filter: brightness(150%);
+  padding: 1rem;
+}
